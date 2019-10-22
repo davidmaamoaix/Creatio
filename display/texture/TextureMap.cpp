@@ -1,7 +1,5 @@
 #include "TextureMap.h"
 
-TextureMap& TextureMap::getInstance() const {
-    static TextureMap map;
-
-    return map;
+void TextureMap::addTextureLink(const std::string &index, int pos) {
+    texturePos.insert({index, pos});
 }

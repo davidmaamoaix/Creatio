@@ -1,10 +1,15 @@
 #pragma once
 
+#include <map>
+#include <string>
 
 #include "../../util/struct/Singleton.h"
 
-class TextureMap: private Singleton {
+class TextureMap{
 
     public:
-        TextureMap& getInstance() const;
+        void addTextureLink(const std::string &index, int pos);
+
+    private:
+        std::map<std::string, int> texturePos;
 };
