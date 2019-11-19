@@ -12,7 +12,7 @@ set(GLFW_LINK /usr/local/Cellar/glfw/3.2.1/lib/libglfw.3.dylib)
 link_libraries(${OPENGL} ${GLEW_LINK} ${GLFW_LINK})
 
 set(SOURCE_FILES main.cpp)
-add_executable(Creatio main.cpp logging/CrashLog.cpp logging/CrashLog.h logging/CrashCause.cpp logging/CrashCause.h display/texture/TextureMap.cpp display/texture/TextureMap.h util/struct/Singleton.h util/struct/Singleton.cpp kernel/state/StateMachine.cpp kernel/state/StateMachine.h kernel/state/State.cpp kernel/state/State.h display/render/Camera.cpp display/render/Camera.h kernel/application/Creatio.cpp kernel/application/Creatio.h util/math/Vec3f.cpp util/math/Vec3f.h)
+add_executable(Creatio main.cpp logging/CrashLog.cpp logging/CrashLog.h logging/CrashCause.cpp logging/CrashCause.h display/texture/TextureMap.cpp display/texture/TextureMap.h util/struct/Singleton.h util/struct/Singleton.cpp kernel/state/StateMachine.cpp kernel/state/StateMachine.h kernel/state/State.cpp kernel/state/State.h display/render/Camera.cpp display/render/Camera.h kernel/application/Creatio.cpp kernel/application/Creatio.h util/math/Vec3f.cpp util/math/Vec3f.h registry/IRegistry.cpp registry/IRegistry.h registry/item/Item.cpp registry/item/Item.h registry/item/ItemProperty.cpp registry/item/ItemProperty.h registry/IProperty.cpp registry/IProperty.h)
 
 if (APPLE)
     target_link_libraries(Creatio "-framework OpenGL")
