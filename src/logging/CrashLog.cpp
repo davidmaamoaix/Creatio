@@ -4,7 +4,9 @@
 
 #include "CrashLog.h"
 
-CrashLog::CrashLog(const std::string &cause, const std::string &info) {
+CrashLog::CrashLog(const std::string &cause, const std::string &info)
+: details{info}
+{
     std::time_t time = std::time(0);
     now = std::localtime(&time);
 
@@ -15,7 +17,6 @@ CrashLog::CrashLog(const std::string &cause, const std::string &info) {
     filename << now->tm_hour << "." << now->tm_min << "." << now->tm_sec << ".txt";
 
     description = "Cause: " + cause;
-    details = info;
 }
 
 void CrashLog::createLog(const std::string &path) {

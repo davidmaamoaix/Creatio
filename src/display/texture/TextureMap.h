@@ -2,7 +2,6 @@
 
 #include <map>
 #include <string>
-#include "../render/Camera.h"
 
 class TextureMap {
 
