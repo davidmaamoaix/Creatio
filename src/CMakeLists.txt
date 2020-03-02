@@ -1,0 +1,5 @@
+add_subdirectory(display)
+add_subdirectory(kernel)
+add_subdirectory(logging)
+add_subdirectory(registry)
+add_subdirectory(util)
