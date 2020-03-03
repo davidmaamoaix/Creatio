@@ -7,7 +7,7 @@ const Direction Directions::SOUTH{"south", 3, {-1, 0, 0}};
 const Direction Directions::EAST{"east", 4, {0, 0, 1}};
 const Direction Directions::WEST{"west", 5, {0, 0, -1}};
 
-Direction Directions::getDirectionFromIndex(int index) {
+const Direction& Directions::getDirectionFromIndex(int index) {
     switch (index) {
         case 0: return Directions::UP;
         case 1: return Directions::DOWN;
@@ -26,6 +26,6 @@ Direction::Direction(const std::string &name, int index, BlockPos dir)
 {
 }
 
-Direction Direction::getOppposite() {
+const Direction& Direction::getOppposite() {
     return Directions::getDirectionFromIndex(index ^ 1);
 }

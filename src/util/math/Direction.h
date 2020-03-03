@@ -7,7 +7,7 @@ class Direction {
 
     public:
         Direction(const std::string &name, int index, BlockPos dir);
-        Direction getOppposite();
+        const Direction& getOppposite();
 
     private:
         std::string name;
@@ -23,7 +23,7 @@ namespace Directions {
     extern const Direction EAST;
     extern const Direction WEST;
 
-    extern Direction getDirectionFromIndex(int index);
+    extern const Direction& getDirectionFromIndex(int index);
 }
 
 
