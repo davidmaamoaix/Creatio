@@ -5,6 +5,5 @@
 #include "src/kernel/application/Creatio.h"
 
 int main() {
-
     return 0;
 }

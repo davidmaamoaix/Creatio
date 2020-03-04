@@ -1,12 +1,16 @@
 #pragma once
 
 #include "../state/StateMachine.h"
+#include "../../registry/block/Blocks.h"
 
 class Creatio {
 
     public:
-        static Creatio& getInstance();
+        static Creatio& get();
+        Creatio();
+        Blocks& blocks();
 
     private:
         StateMachine stateMachine;
+        Blocks allBlocks;
 };

@@ -5,7 +5,10 @@
 class BlockState {
 
     public:
-        explicit BlockState(const Block& block);
+        static std::shared_ptr<BlockState> air();
+        static std::shared_ptr<BlockState> ofBlock(const Block &block);
+        explicit BlockState(const Block &block);
+        BlockState(const BlockState &state);
         const Block& getBlock() const;
 
     private:
