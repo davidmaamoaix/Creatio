@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+
 #include "BlockState.h"
 #include "../display/render/RenderChunk.h"
 

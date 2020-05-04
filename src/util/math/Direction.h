@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+
 #include "BlockPos.h"
 
 class Direction {
@@ -16,6 +17,7 @@ class Direction {
 };
 
 namespace Directions {
+
     extern const Direction UP;
     extern const Direction DOWN;
     extern const Direction NORTH;
