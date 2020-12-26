@@ -37,3 +37,15 @@ BlockPos BlockPos::offset(Direction dir) {
 BlockPos BlockPos::offset(Direction dir, int distance) {
     return (*this) + Facing::offset(dir) * distance;
 }
+
+int BlockPos::getX() {
+    return x;
+}
+
+int BlockPos::getY() {
+    return y;
+}
+
+int BlockPos::getZ() {
+    return z;
+}

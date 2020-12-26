@@ -10,6 +10,7 @@
 class BlockState {
 
 public:
+    BlockState();
     BlockState(Block *, int meta);
     BlockState setMeta(int meta);
     Block *getBlock();

@@ -8,7 +8,11 @@
 class Chunk {
 
 public:
-    BlockState getState(BlockPos pos);
+    BlockState getState(BlockPos); // pos relative to chunk pos
+    void setState(BlockPos, BlockState);
+
+private:
+    BlockState states[16 * 256 * 16];
 };
 
 

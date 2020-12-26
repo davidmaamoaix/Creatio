@@ -1,5 +1,11 @@
 #include "blockstate.h"
 
+BlockState::BlockState()
+: block(nullptr) // TODO: change to AIR block later
+, meta(0) {
+
+}
+
 BlockState::BlockState(Block *type, int metadata)
 : block(type)
 , meta(metadata) {

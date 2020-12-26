@@ -16,6 +16,9 @@ public:
     BlockPos operator/(float);
     BlockPos offset(Direction);
     BlockPos offset(Direction, int);
+    int getX();
+    int getY();
+    int getZ();
 
 private:
     int x, y, z;
