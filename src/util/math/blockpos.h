@@ -8,6 +8,8 @@
 class BlockPos {
 
 public:
+    static BlockPos fromDirection(Direction);
+
     BlockPos(int, int, int);
     BlockPos(float, float, float);
     BlockPos operator+(BlockPos);

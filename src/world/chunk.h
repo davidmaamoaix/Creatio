@@ -1,6 +1,4 @@
-#ifndef CREATIO_CHUNK_H
-#define CREATIO_CHUNK_H
-
+#pragma once
 
 #include "../block/blockstate.h"
 #include "../util/math/blockpos.h"
@@ -14,6 +12,3 @@ public:
 private:
     BlockState states[16 * 256 * 16];
 };
-
-
-#endif //CREATIO_CHUNK_H
