@@ -12,15 +12,15 @@ public:
 
     BlockPos(int, int, int);
     BlockPos(float, float, float);
-    BlockPos operator+(BlockPos);
-    BlockPos operator-(BlockPos);
-    BlockPos operator*(float);
-    BlockPos operator/(float);
-    BlockPos offset(Direction);
-    BlockPos offset(Direction, int);
-    int getX();
-    int getY();
-    int getZ();
+    BlockPos operator+(BlockPos) const;
+    BlockPos operator-(BlockPos) const;
+    BlockPos operator*(float) const;
+    BlockPos operator/(float) const;
+    BlockPos offset(Direction) const;
+    BlockPos offset(Direction, int) const;
+    int getX() const;
+    int getY() const;
+    int getZ() const;
 
 private:
     int x, y, z;

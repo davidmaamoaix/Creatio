@@ -12,14 +12,14 @@ BlockState::BlockState(Block *type, int metadata)
 
 }
 
-BlockState BlockState::setMeta(int metadata) {
+BlockState BlockState::setMeta(int metadata) const {
     return {block, metadata};
 }
 
-Block* BlockState::getBlock() {
+Block* BlockState::getBlock() const {
     return block;
 }
 
-int BlockState::getMeta() {
+int BlockState::getMeta() const {
     return meta;
 }

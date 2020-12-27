@@ -12,9 +12,9 @@ class BlockState {
 public:
     BlockState();
     BlockState(Block *, int meta);
-    BlockState setMeta(int meta);
-    Block *getBlock();
-    int getMeta();
+    BlockState setMeta(int meta) const;
+    Block *getBlock() const;
+    int getMeta() const;
 
 private:
     Block *block;

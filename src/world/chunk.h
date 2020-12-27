@@ -6,8 +6,8 @@
 class Chunk {
 
 public:
-    BlockState getState(BlockPos); // pos relative to chunk pos
-    void setState(BlockPos, BlockState);
+    BlockState getState(const BlockPos &) const; // pos relative to chunk pos
+    void setState(const BlockPos &, BlockState);
 
 private:
     BlockState states[16 * 256 * 16];

@@ -26,38 +26,38 @@ BlockPos::BlockPos(float xPos, float yPos, float zPos)
 
 }
 
-BlockPos BlockPos::operator+(BlockPos other) {
+BlockPos BlockPos::operator+(BlockPos other) const {
     return {x + other.x, y + other.y, z + other.z};
 }
 
-BlockPos BlockPos::operator-(BlockPos other) {
+BlockPos BlockPos::operator-(BlockPos other) const {
     return {x - other.x, y - other.y, z - other.z};
 }
 
-BlockPos BlockPos::operator*(float scalar) {
+BlockPos BlockPos::operator*(float scalar) const {
     return {x * scalar, y * scalar, z * scalar};
 }
 
-BlockPos BlockPos::operator/(float scalar) {
+BlockPos BlockPos::operator/(float scalar) const {
     return {x / scalar, y / scalar, z / scalar};
 }
 
-BlockPos BlockPos::offset(Direction dir) {
+BlockPos BlockPos::offset(Direction dir) const {
     return (*this) + fromDirection(dir);
 }
 
-BlockPos BlockPos::offset(Direction dir, int distance) {
+BlockPos BlockPos::offset(Direction dir, int distance) const {
     return (*this) + fromDirection(dir) * distance;
 }
 
-int BlockPos::getX() {
+int BlockPos::getX() const {
     return x;
 }
 
-int BlockPos::getY() {
+int BlockPos::getY() const {
     return y;
 }
 
-int BlockPos::getZ() {
+int BlockPos::getZ() const {
     return z;
 }
