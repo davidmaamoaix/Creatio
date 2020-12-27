@@ -3,31 +3,17 @@
 #include <iostream>
 
 #include "src/config/settings.h"
+#include "src/creatio/application.h"
 
 int main() {
-    GLFWwindow *window;
 
-    if (!glfwInit()) {
-        return -1;
+    Application &app = Application::get();
+
+    if (!app.launch()) {
+        std::cout << "LAUNCHING FAILED" << std::endl;
     }
 
-    window = glfwCreateWindow(
-        WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, nullptr, nullptr
-        );
+    app.loop();
 
-    if (!window) {
-        glfwTerminate();
-        return -1;
-    }
-
-    glfwMakeContextCurrent(window);
-
-    while (!glfwWindowShouldClose(window)) {
-        glClear(GL_COLOR_BUFFER_BIT);
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
-
-    glfwTerminate();
     return 0;
 }
