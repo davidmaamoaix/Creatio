@@ -5,4 +5,5 @@
 namespace Logging {
 
     void printVersions();
+    void logGLError();
 }

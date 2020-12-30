@@ -1,4 +1,3 @@
-#include <glfw3.h>
 #include <iostream>
 
 #include "src/config/settings.h"

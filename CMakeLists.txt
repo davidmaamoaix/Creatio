@@ -14,6 +14,8 @@ link_libraries(${OPENGL} ${GLEW_LINK} ${GLFW_LINK})
 set(SOURCE_FILES main.cpp)
 add_executable(Creatio main.cpp src/util/math/facing.cpp src/util/math/facing.h src/world/chunk.cpp src/world/chunk.h src/block/block.cpp src/block/block.h src/block/blockstate.h src/block/blockstate.cpp src/block/block.cpp src/block/block.h src/util/math/blockpos.cpp src/util/math/blockpos.h src/world/world.cpp src/world/world.h src/render/camera.cpp src/render/camera.h src/creatio/application.cpp src/creatio/application.h src/util/math/hashing.cpp src/util/math/hashing.h src/render/shader/shader.cpp src/render/shader/shader.h src/util/logging.cpp src/util/logging.h)
 
+file(COPY asset DESTINATION ${CMAKE_BINARY_DIR})
+
 if (APPLE)
     target_link_libraries(Creatio "-framework OpenGL")
 endif()

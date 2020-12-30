@@ -35,6 +35,12 @@ bool Application::launch() {
 
     glfwMakeContextCurrent(window);
 
+    glewExperimental = GL_TRUE;
+    if (glewInit() != GLEW_OK) {
+        std::cout << "GLEW INITIALIZATION FAILED" << std::endl;
+        return false;
+    }
+
     Logging::printVersions();
 
     return true;
@@ -43,38 +49,52 @@ bool Application::launch() {
 void Application::loop() {
     GLfloat pos[] = {
         -0.5f, -0.5f,
-        0, 0.5f,
         0.5f, -0.5f,
+        0.5f, 0.5f,
+        -0.5f, 0.5f,
     };
 
-    std::string vertSrc =
-        "#version 410 core\n"
-        "layout(location = 0) in vec4 position;\n"
-        "void main() {\n"
-        "   gl_Position = position;\n"
-        "}";
+    GLuint indices[] = {
+        0, 1, 2,
+        2, 3, 0
+    };
 
-    std::string fragSrc =
-        "#version 410 core\n"
-        "layout(location = 0) out vec4 color;\n"
-        "void main() {\n"
-        "   color = vec4(1, 0, 0, 1);\n"
-        "}";
+    std::string vertSrc = "asset/shader/default.vert";
+
+    std::string fragSrc = "asset/shader/default.frag";
+
+    GLuint vao;
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
 
     GLuint buf;
     glGenBuffers(1, &buf);
     glBindBuffer(GL_ARRAY_BUFFER, buf);
     glBufferData(GL_ARRAY_BUFFER, sizeof(pos), pos, GL_STATIC_DRAW);
-
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 2, nullptr);
+    glBindBuffer(GL_ARRAY_BUFFER, buf);
+
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 2, nullptr);
+
+    GLuint indexBuf;
+    glGenBuffers(1, &indexBuf);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuf);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+    glBindVertexArray(0);
 
     Shader shader{vertSrc, fragSrc};
+    shader.bind();
 
+    GLint varColor = shader.getUniformLocation("uniformColor");
+
+    glBindVertexArray(vao);
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glUniform4f(varColor, 0.5f, 0.5f, 1.0f, 1.0f);
+
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

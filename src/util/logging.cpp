@@ -15,3 +15,9 @@ void Logging::printVersions() {
 
     std::cout << std::endl;
 }
+
+void Logging::logGLError() {
+    while (GLenum error = glGetError()) {
+        std::cout << "OPENGL ERROR: " << error << std::endl;
+    }
+}

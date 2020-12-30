@@ -11,6 +11,7 @@ public:
     Shader(const std::string &vertPath, const std::string &fragPath);
     ~Shader();
     void bind();
+    GLint getUniformLocation(const GLchar *);
 
 private:
     GLuint program;
