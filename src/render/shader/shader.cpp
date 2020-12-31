@@ -58,11 +58,11 @@ Shader::~Shader() {
     glDeleteProgram(program);
 }
 
-void Shader::bind() {
+void Shader::bind() const {
     glUseProgram(program);
 }
 
-GLint Shader::getUniformLocation(const GLchar *name) {
+GLint Shader::getUniformLocation(const GLchar *name) const {
     int location = glGetUniformLocation(program, name);
 
     if (location == -1) {

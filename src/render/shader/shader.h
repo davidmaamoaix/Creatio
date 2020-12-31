@@ -10,8 +10,8 @@ class Shader {
 public:
     Shader(const std::string &vertPath, const std::string &fragPath);
     ~Shader();
-    void bind();
-    GLint getUniformLocation(const GLchar *);
+    void bind() const;
+    GLint getUniformLocation(const GLchar *) const;
 
 private:
     GLuint program;
