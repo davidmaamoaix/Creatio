@@ -6,6 +6,7 @@
 #include "../config/settings.h"
 #include "../render/shader/shader.h"
 #include "../util/logging.h"
+#include "../render/texture.h"
 
 Application &Application::get() {
     static Application app;
@@ -48,10 +49,10 @@ bool Application::launch() {
 
 void Application::loop() {
     GLfloat pos[] = {
-        -0.5f, -0.5f,
-        0.5f, -0.5f,
-        0.5f, 0.5f,
-        -0.5f, 0.5f,
+        -0.5f, -0.5f, 0.0f, 0.0f,
+        0.5f, -0.5f, 1.0f, 0.0f, // correct
+        0.5f, 0.5f, 1.0f, 1.0f,
+        -0.5f, 0.5f, 0.0f, 1.0f // correct
     };
 
     GLuint indices[] = {
@@ -71,10 +72,13 @@ void Application::loop() {
     glGenBuffers(1, &buf);
     glBindBuffer(GL_ARRAY_BUFFER, buf);
     glBufferData(GL_ARRAY_BUFFER, sizeof(pos), pos, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, buf);
 
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 2, nullptr);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 4, nullptr);
+
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 4, (void *) 8);
 
     GLuint indexBuf;
     glGenBuffers(1, &indexBuf);
@@ -86,15 +90,21 @@ void Application::loop() {
     Shader shader{vertSrc, fragSrc};
     shader.bind();
 
-    GLint varColor = shader.getUniformLocation("uniformColor");
+    Texture tex{"asset/texture/block/dirt.png"};
+    tex.bind();
+
+    //GLint varColor = shader.getUniformLocation("uniformColor");
+    GLint varTex = shader.getUniformLocation("texSampler");
 
     glBindVertexArray(vao);
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glUniform4f(varColor, 0.5f, 0.5f, 1.0f, 1.0f);
+        //glUniform4f(varColor, 0.5f, 0.5f, 1.0f, 1.0f);
+        glUniform1i(varTex, 0);
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+        Logging::logGLError();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
