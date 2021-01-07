@@ -3,8 +3,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "chunk.h"
-#include "../util/math/hashing.h"
+#include "world/chunk.h"
+#include "util/math/hashing.h"
 
 typedef std::pair<int, int> ChunkPos;
 

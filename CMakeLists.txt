@@ -16,6 +16,8 @@ add_executable(Creatio main.cpp src/util/math/facing.cpp src/util/math/facing.h 
 
 file(COPY asset DESTINATION ${CMAKE_BINARY_DIR})
 
+include_directories(src/vendor src)
+
 if (APPLE)
     target_link_libraries(Creatio "-framework OpenGL")
 endif()

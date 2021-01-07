@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "src/config/settings.h"
-#include "src/creatio/application.h"
+#include "config/settings.h"
+#include "creatio/application.h"
 
 int main() {
 

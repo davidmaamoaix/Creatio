@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../block/blockstate.h"
-#include "../util/math/blockpos.h"
+#include "block/blockstate.h"
+#include "util/math/blockpos.h"
 
 class Chunk {
 

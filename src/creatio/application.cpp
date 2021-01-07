@@ -3,10 +3,10 @@
 #include <string>
 #include <iostream>
 
-#include "../config/settings.h"
-#include "../render/shader/shader.h"
-#include "../util/logging.h"
-#include "../render/texture.h"
+#include "config/settings.h"
+#include "render/shader/shader.h"
+#include "util/logging.h"
+#include "render/texture.h"
 
 Application &Application::get() {
     static Application app;

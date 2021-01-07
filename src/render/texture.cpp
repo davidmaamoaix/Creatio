@@ -4,7 +4,7 @@
 #include <iostream>
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "../vendor/stb/stb_image.h"
+#include "stb/stb_image.h"
 
 Texture::Texture(const std::string &path) {
     std::ifstream file{path};
@@ -25,7 +25,8 @@ Texture::Texture(const std::string &path) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+    glTexImage2D(
+        GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
 }
 
 Texture::~Texture() {
