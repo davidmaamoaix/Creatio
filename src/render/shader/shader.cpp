@@ -1,7 +1,7 @@
 #include "shader.h"
 
 #include <fstream>
-#include <glfw3.h>
+#include <GLFW/glfw3.h>
 #include <iostream>
 #include <sstream>
 
