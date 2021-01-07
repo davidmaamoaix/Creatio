@@ -2,11 +2,18 @@
 
 #include <string>
 #include <iostream>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "config/settings.h"
 #include "render/shader/shader.h"
 #include "util/logging.h"
 #include "render/texture.h"
+
+Application::Application()
+: window(nullptr) {
+
+}
 
 Application &Application::get() {
     static Application app;
@@ -49,10 +56,10 @@ bool Application::launch() {
 
 void Application::loop() {
     GLfloat pos[] = {
-        -0.5f, -0.5f, 0.0f, 0.0f,
-        0.5f, -0.5f, 1.0f, 0.0f, // correct
-        0.5f, 0.5f, 1.0f, 1.0f,
-        -0.5f, 0.5f, 0.0f, 1.0f // correct
+        -0.5f, -0.5f, -1.0f, 0.0f, 0.0f,
+        0.5f, -0.5f, -1.0f, 1.0f, 0.0f, // correct
+        0.5f, 0.5f, -1.0f, 1.0f, 1.0f,
+        -0.5f, 0.5f, -1.0f, 0.0f, 1.0f // correct
     };
 
     GLuint indices[] = {
@@ -75,10 +82,10 @@ void Application::loop() {
     glBindBuffer(GL_ARRAY_BUFFER, buf);
 
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 4, nullptr);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, nullptr);
 
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 4, (void *) 8);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (void *) 12);
 
     GLuint indexBuf;
     glGenBuffers(1, &indexBuf);
@@ -95,6 +102,7 @@ void Application::loop() {
 
     //GLint varColor = shader.getUniformLocation("uniformColor");
     GLint varTex = shader.getUniformLocation("texSampler");
+    GLint varMVP = shader.getUniformLocation("MVP");
 
     glBindVertexArray(vao);
     while (!glfwWindowShouldClose(window)) {
@@ -102,6 +110,7 @@ void Application::loop() {
 
         //glUniform4f(varColor, 0.5f, 0.5f, 1.0f, 1.0f);
         glUniform1i(varTex, 0);
+        glUniformMatrix4fv(varMVP, 1, GL_FALSE, &camera.getViewMatrix()[0][0]);
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
         Logging::logGLError();

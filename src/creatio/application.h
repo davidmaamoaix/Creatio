@@ -5,6 +5,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "render/camera.h"
+
 class Application {
 
 public:
@@ -16,5 +18,6 @@ public:
 
 private:
     GLFWwindow *window;
-    Application() = default;
+    Camera camera;
+    Application();
 };

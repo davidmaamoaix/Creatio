@@ -1,6 +1,5 @@
 #include <iostream>
 
-#include "config/settings.h"
 #include "creatio/application.h"
 
 int main() {
