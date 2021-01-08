@@ -45,7 +45,7 @@ bool Application::launch() {
     }
 
     glfwMakeContextCurrent(window);
-    glfwSetKeyCallback(window, keyCallback);
+    glfwSetKeyCallback(window, Input::keyCallback);
 
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK) {
@@ -122,9 +122,6 @@ void Application::loop() {
         auto currTime = (float) glfwGetTime();
         deltaTime = currTime - lastFrame;
         lastFrame = currTime;
-
-        //glm::vec2 mouseMove = getMouseMovement(window) * deltaTime * Settings::SENSITIVITY;
-        //camera.rotate(mouseMove.x, mouseMove.y);
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
