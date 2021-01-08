@@ -8,6 +8,7 @@ class Texture {
 public:
     explicit Texture(const std::string &);
     ~Texture();
+
     void bind() const;
     int getWidth() const;
     int getHeight() const;

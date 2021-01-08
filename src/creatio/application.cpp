@@ -9,6 +9,7 @@
 #include "render/shader/shader.h"
 #include "util/logging.h"
 #include "render/texture.h"
+#include "util/input.h"
 
 Application::Application()
 : window(nullptr) {
@@ -22,6 +23,8 @@ Application &Application::get() {
 }
 
 bool Application::launch() {
+    Settings::loadSettings();
+
     if (!glfwInit()) {
         std::cout << "GLFW INITIALIZATION FAILED" << std::endl;
         return false;
@@ -42,6 +45,7 @@ bool Application::launch() {
     }
 
     glfwMakeContextCurrent(window);
+    glfwSetKeyCallback(window, keyCallback);
 
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK) {
@@ -104,11 +108,26 @@ void Application::loop() {
     GLint varTex = shader.getUniformLocation("texSampler");
     GLint varMVP = shader.getUniformLocation("MVP");
 
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+
+    auto deltaTime = (float) glfwGetTime();
+    float lastFrame = deltaTime;
+
+    // Fix for Mac OS
+    glfwSwapBuffers(window);
+
     glBindVertexArray(vao);
     while (!glfwWindowShouldClose(window)) {
-        glClear(GL_COLOR_BUFFER_BIT);
+        auto currTime = (float) glfwGetTime();
+        deltaTime = currTime - lastFrame;
+        lastFrame = currTime;
 
-        //glUniform4f(varColor, 0.5f, 0.5f, 1.0f, 1.0f);
+        //glm::vec2 mouseMove = getMouseMovement(window) * deltaTime * Settings::SENSITIVITY;
+        //camera.rotate(mouseMove.x, mouseMove.y);
+
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         glUniform1i(varTex, 0);
         glUniformMatrix4fv(varMVP, 1, GL_FALSE, &camera.getViewMatrix()[0][0]);
 
@@ -117,6 +136,17 @@ void Application::loop() {
 
         glfwSwapBuffers(window);
         glfwPollEvents();
+
+        #ifdef __APPLE__
+        static bool macUpdate = false;
+
+        if(!macUpdate) {
+            int x, y;
+            glfwGetWindowPos(window, &x, &y);
+            glfwSetWindowPos(window, x + 1, y);
+            macUpdate = true;
+        }
+        #endif
     }
 
     glfwTerminate();

@@ -2,19 +2,28 @@
 
 #include "config/settings.h"
 
-Camera::Camera()
-: x(0)
-, y(0)
-, z(0) {
+Camera::Camera() {
+    z = 1;
+}
 
+void Camera::rotate(float x, float y) {
+    pitch += y;
+    yaw += x;
 }
 
 glm::mat4 Camera::getViewMatrix() {
     glm::mat4 proj = glm::perspective(
-        glm::radians(FOV), 1.0f, 0.1f, 100.0f);
+        glm::radians(Settings::FOV), 1.0f, 0.1f, 100.0f);
 
-    glm::mat4 view = glm::translate(glm::mat4{1.0f}, glm::vec3(-x, -y, -z));
+    glm::vec3 front{
+        -cos(glm::radians(pitch)) * sin(glm::radians(yaw)),
+        sin(glm::radians(pitch)),
+        -cos(glm::radians(pitch)) * cos(glm::radians(yaw)),
+    };
 
+    glm::vec3 pos{x, y, z};
+
+    glm::mat4 view = glm::lookAt(pos, front, {0, 1, 0});
 
     return proj * view;
 }

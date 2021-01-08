@@ -4,4 +4,11 @@
 #define WINDOW_HEIGHT 720
 #define WINDOW_TITLE "Creatio"
 
-#define FOV 90.0f
+class Settings {
+
+public:
+    static float FOV;
+    static float SENSITIVITY;
+
+    static void loadSettings();
+};

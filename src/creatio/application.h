@@ -13,11 +13,13 @@ public:
     static Application &get();
     Application(const Application &) = delete;
     void operator=(const Application &) = delete;
+
     bool launch();
     void loop();
 
 private:
     GLFWwindow *window;
     Camera camera;
+
     Application();
 };
